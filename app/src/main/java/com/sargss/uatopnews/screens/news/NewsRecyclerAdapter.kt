@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.URLUtil
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.text.parseAsHtml
@@ -40,6 +41,8 @@ class NewsRecyclerAdapter(
         val textPublishedTime: TextView = binding.textNewsTime
         val textSource: TextView = binding.textNewsSource
         val textDescription: TextView = binding.textNewsDescription
+
+        val btnOpenNewsInBrowser: Button = binding.btnOpenInBrowser
     }
 
     @SuppressLint("SimpleDateFormat")
@@ -63,10 +66,13 @@ class NewsRecyclerAdapter(
             holder.textPublishedTime.visibility = View.INVISIBLE
         }
 
-
         showTextOrHide(holder.textTitle, model.title)
         showTextOrHide(holder.textSource, model.source?.name)
         showTextOrHide(holder.textDescription, model.description)
+
+        holder.btnOpenNewsInBrowser.setOnClickListener {
+            fragment.openInBrowser(model.url)
+        }
     }
 
     override fun getItemCount(): Int {
