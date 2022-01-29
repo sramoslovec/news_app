@@ -18,7 +18,7 @@ abstract class BaseContract {
             this.view = view
         }
 
-        fun onDestroy() {
+        open fun onDestroy() {
             this.view = null
         }
     }

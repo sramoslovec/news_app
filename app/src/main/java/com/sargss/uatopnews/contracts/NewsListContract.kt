@@ -10,5 +10,6 @@ interface NewsListContract {
 
     interface View : BaseContract.View {
         fun showNewsList(list: List<ArticlesResponse.Articles>)
+        fun showNetworkError()
     }
 }

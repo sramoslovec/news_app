@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.sargss.uatopnews.App
+import com.sargss.uatopnews.MainActivity
 import com.sargss.uatopnews.R
 import com.sargss.uatopnews.contracts.NewsListContract
 import com.sargss.uatopnews.data.ArticlesResponse
@@ -29,8 +30,6 @@ class NewsFragment : Fragment(), NewsListContract.View {
 
     private var _binding: FragmentNewsBinding? = null
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onAttach(context: Context) {
@@ -81,6 +80,10 @@ class NewsFragment : Fragment(), NewsListContract.View {
                 resources.getDimension(R.dimen.news_card_margins)
             )
         )
+    }
+
+    override fun showNetworkError() {
+        (requireActivity() as MainActivity).showConnectionErrorScreen()
     }
 
     override fun onDestroyView() {

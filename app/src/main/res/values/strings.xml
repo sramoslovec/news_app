@@ -2,4 +2,6 @@
     <string name="app_name">Новини</string>
     <string name="msg_open_news_browser_error">Не можу відкрити посилання!</string>
     <string name="msg_choose_browser">Виберіть як відкрити новину</string>
+    <string name="msg_internet_error">Відсутній інтернет!</string>
+    <string name="msg_retry">Спробувати знову</string>
 </resources>
