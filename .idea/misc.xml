@@ -3,10 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/admin/AndroidStudioProjects/UaTopNews/app/src/main/res/drawable/bg_rounded_search_view.xml" value="0.2505" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/UaTopNews/app/src/main/res/drawable/ic_baseline_arrow_forward.xml" value="0.18" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/UaTopNews/app/src/main/res/layout/activity_main.xml" value="0.23072916666666668" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/UaTopNews/app/src/main/res/layout/card_news_item.xml" value="0.5" />
-        <entry key="..\:/Users/admin/AndroidStudioProjects/UaTopNews/app/src/main/res/layout/fragment_news.xml" value="0.33" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/UaTopNews/app/src/main/res/layout/fragment_news.xml" value="0.25" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/UaTopNews/app/src/main/res/layout/fragment_no_internet.xml" value="0.33" />
       </map>
     </option>

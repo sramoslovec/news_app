@@ -4,4 +4,5 @@
     <string name="msg_choose_browser">Виберіть як відкрити новину</string>
     <string name="msg_internet_error">Відсутній інтернет!</string>
     <string name="msg_retry">Спробувати знову</string>
+    <string name="toolbar_title">Топ новини</string>
 </resources>
