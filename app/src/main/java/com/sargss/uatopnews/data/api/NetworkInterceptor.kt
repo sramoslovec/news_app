@@ -1,4 +1,4 @@
-package com.sargss.uatopnews.api
+package com.sargss.uatopnews.data.api
 
 import okhttp3.Interceptor
 import okhttp3.Request

@@ -1,4 +1,4 @@
-package com.sargss.uatopnews.contracts
+package com.sargss.uatopnews.presentation.contracts
 
 abstract class BaseContract {
 

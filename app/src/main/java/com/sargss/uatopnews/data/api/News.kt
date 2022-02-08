@@ -1,6 +1,6 @@
-package com.sargss.uatopnews.api
+package com.sargss.uatopnews.data.api
 
-import com.sargss.uatopnews.data.api.ArticlesResponse
+import com.sargss.uatopnews.data.models.ArticlesResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 

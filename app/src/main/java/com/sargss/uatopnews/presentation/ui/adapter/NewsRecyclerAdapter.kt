@@ -12,7 +12,7 @@ import androidx.core.text.parseAsHtml
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.sargss.uatopnews.data.api.ArticlesResponse
+import com.sargss.uatopnews.data.models.ArticlesResponse
 import com.sargss.uatopnews.databinding.CardNewsItemBinding
 import com.sargss.uatopnews.presentation.ui.NewsFragment
 import java.text.SimpleDateFormat

@@ -1,10 +1,9 @@
-package com.sargss.uatopnews
+package com.sargss.uatopnews.presentation.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
-import com.sargss.uatopnews.presentation.ui.NewsFragment
-import com.sargss.uatopnews.presentation.ui.NoInternetFragment
+import com.sargss.uatopnews.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

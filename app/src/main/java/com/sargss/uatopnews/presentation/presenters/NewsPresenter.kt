@@ -1,7 +1,7 @@
 package com.sargss.uatopnews.presentation.presenters
 
-import com.sargss.uatopnews.api.News
-import com.sargss.uatopnews.contracts.NewsListContract
+import com.sargss.uatopnews.data.api.News
+import com.sargss.uatopnews.presentation.contracts.NewsListContract
 import kotlinx.coroutines.*
 import java.net.ConnectException
 import java.net.UnknownHostException

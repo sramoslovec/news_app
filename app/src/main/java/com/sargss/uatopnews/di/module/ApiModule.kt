@@ -1,7 +1,7 @@
 package com.sargss.uatopnews.di.module
 
-import com.sargss.uatopnews.api.NetworkInterceptor
-import com.sargss.uatopnews.api.News
+import com.sargss.uatopnews.data.api.NetworkInterceptor
+import com.sargss.uatopnews.data.api.News
 import dagger.Module
 import dagger.Provides
 import okhttp3.Interceptor

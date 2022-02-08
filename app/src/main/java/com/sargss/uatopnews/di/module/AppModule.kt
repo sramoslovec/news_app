@@ -1,6 +1,6 @@
 package com.sargss.uatopnews.di.module
 
-import com.sargss.uatopnews.contracts.NewsListContract
+import com.sargss.uatopnews.presentation.contracts.NewsListContract
 import com.sargss.uatopnews.presentation.presenters.NewsPresenter
 import dagger.Module
 import dagger.Provides

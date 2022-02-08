@@ -1,4 +1,4 @@
-package com.sargss.uatopnews
+package com.sargss.uatopnews.core
 
 import android.app.Application
 import com.sargss.uatopnews.di.components.AppComponent

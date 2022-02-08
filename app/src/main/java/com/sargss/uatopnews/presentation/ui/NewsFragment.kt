@@ -13,11 +13,10 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.sargss.uatopnews.App
-import com.sargss.uatopnews.MainActivity
+import com.sargss.uatopnews.core.App
 import com.sargss.uatopnews.R
-import com.sargss.uatopnews.contracts.NewsListContract
-import com.sargss.uatopnews.data.api.ArticlesResponse
+import com.sargss.uatopnews.presentation.contracts.NewsListContract
+import com.sargss.uatopnews.data.models.ArticlesResponse
 import com.sargss.uatopnews.databinding.FragmentNewsBinding
 import com.sargss.uatopnews.presentation.ui.adapter.ItemsMarginDecoration
 import com.sargss.uatopnews.presentation.presenters.NewsPresenter

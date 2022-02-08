@@ -1,6 +1,6 @@
-package com.sargss.uatopnews.contracts
+package com.sargss.uatopnews.presentation.contracts
 
-import com.sargss.uatopnews.data.api.ArticlesResponse
+import com.sargss.uatopnews.data.models.ArticlesResponse
 
 interface NewsListContract {
 
