@@ -1,7 +1,7 @@
 package com.sargss.uatopnews.di.module
 
 import com.sargss.uatopnews.contracts.NewsListContract
-import com.sargss.uatopnews.screens.news.NewsPresenter
+import com.sargss.uatopnews.presentation.presenters.NewsPresenter
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton

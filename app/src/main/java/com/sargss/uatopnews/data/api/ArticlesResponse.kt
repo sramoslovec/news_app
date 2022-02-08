@@ -1,4 +1,4 @@
-package com.sargss.uatopnews.data
+package com.sargss.uatopnews.data.api
 
 import com.google.gson.annotations.SerializedName
 

@@ -1,4 +1,4 @@
-package com.sargss.uatopnews.screens.news
+package com.sargss.uatopnews.presentation.ui.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -9,18 +9,35 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.text.parseAsHtml
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.sargss.uatopnews.data.ArticlesResponse
+import com.sargss.uatopnews.data.api.ArticlesResponse
 import com.sargss.uatopnews.databinding.CardNewsItemBinding
+import com.sargss.uatopnews.presentation.ui.NewsFragment
 import java.text.SimpleDateFormat
 import java.util.*
 
-class NewsRecyclerAdapter(
-    private val list: List<ArticlesResponse.Articles>,
-    private val fragment: NewsFragment
-) :
+class NewsRecyclerAdapter(private val fragment: NewsFragment) :
     RecyclerView.Adapter<NewsRecyclerAdapter.ViewHolder>() {
+
+    private var list: List<ArticlesResponse.Articles> = listOf()
+        set(value) {
+            val diffCallback = DiffUtilCallback(list, value)
+            val diffResult = DiffUtil.calculateDiff(diffCallback)
+
+            cachedList = field
+            field = value
+
+            diffResult.dispatchUpdatesTo(this)
+        }
+
+
+    private var cachedList: List<ArticlesResponse.Articles> = listOf()
+
+    fun setItems(newList: List<ArticlesResponse.Articles>) {
+        list = newList
+    }
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -41,7 +58,6 @@ class NewsRecyclerAdapter(
         val textPublishedTime: TextView = binding.textNewsTime
         val textSource: TextView = binding.textNewsSource
         val textDescription: TextView = binding.textNewsDescription
-
         val btnOpenNewsInBrowser: Button = binding.btnOpenInBrowser
     }
 
@@ -86,6 +102,23 @@ class NewsRecyclerAdapter(
             // i saw at least apostrophe encoded in HTML code, so to correctly show encoded symbols
             // i just parse all text as html
             textElement.text = value.parseAsHtml()
+        }
+    }
+
+    class DiffUtilCallback(
+        private val oldList: List<ArticlesResponse.Articles>,
+        private val newList: List<ArticlesResponse.Articles>
+    ) : DiffUtil.Callback() {
+        override fun getOldListSize(): Int = oldList.size
+
+        override fun getNewListSize(): Int = newList.size
+
+        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            return oldList[oldItemPosition].url == newList[newItemPosition].url
+        }
+
+        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            return oldList[oldItemPosition] == newList[newItemPosition]
         }
     }
 }

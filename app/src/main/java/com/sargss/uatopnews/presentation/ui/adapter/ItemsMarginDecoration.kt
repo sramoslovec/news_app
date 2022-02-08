@@ -1,24 +1,21 @@
-package com.sargss.uatopnews.screens.news
+package com.sargss.uatopnews.presentation.ui.adapter
 
-import android.content.Context
 import android.graphics.Rect
-import androidx.recyclerview.widget.RecyclerView.ItemDecoration
+import android.util.DisplayMetrics
 import androidx.recyclerview.widget.RecyclerView
 import android.util.TypedValue
 import android.view.View
 
-class ItemsMarginDecoration(context: Context, margins: Float) : ItemDecoration() {
+class ItemsMarginDecoration(
+    metrics: DisplayMetrics,
+    margins: Float
+) : RecyclerView.ItemDecoration() {
 
-    private val calculatedMargins: Int
-
-    init {
-        val metrics = context.resources.displayMetrics
-        calculatedMargins = TypedValue.applyDimension(
-            TypedValue.COMPLEX_UNIT_DIP,
-            margins,
-            metrics
-        ).toInt()
-    }
+    private val calculatedMargins: Int = TypedValue.applyDimension(
+        TypedValue.COMPLEX_UNIT_DIP,
+        margins,
+        metrics
+    ).toInt()
 
     override fun getItemOffsets(
         outRect: Rect,

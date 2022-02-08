@@ -1,12 +1,8 @@
-package com.sargss.uatopnews.screens.news
+package com.sargss.uatopnews.presentation.presenters
 
-import android.util.Log
 import com.sargss.uatopnews.api.News
 import com.sargss.uatopnews.contracts.NewsListContract
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import java.net.ConnectException
 import java.net.UnknownHostException
 import javax.inject.Inject
@@ -23,6 +19,24 @@ class NewsPresenter @Inject constructor() : NewsListContract.Presenter() {
 
             try {
                 val response = news.getNews()
+
+                launch(Dispatchers.Main) {
+                    getView().showNewsList(response.articles)
+                }
+            } catch (t: Throwable) {
+                when (t) {
+                    is UnknownHostException -> getView().showNetworkError()
+                    is ConnectException -> getView().showNetworkError()
+                }
+            }
+        }
+    }
+
+    override fun processSearch(query: String) {
+        job = CoroutineScope(Dispatchers.Default).launch {
+
+            try {
+                val response = news.getNewsByQuery(query)
 
                 launch(Dispatchers.Main) {
                     getView().showNewsList(response.articles)

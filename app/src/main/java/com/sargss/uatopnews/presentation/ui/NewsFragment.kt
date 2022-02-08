@@ -1,4 +1,4 @@
-package com.sargss.uatopnews.screens.news
+package com.sargss.uatopnews.presentation.ui
 
 import android.content.ActivityNotFoundException
 import android.content.Context
@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,8 +17,11 @@ import com.sargss.uatopnews.App
 import com.sargss.uatopnews.MainActivity
 import com.sargss.uatopnews.R
 import com.sargss.uatopnews.contracts.NewsListContract
-import com.sargss.uatopnews.data.ArticlesResponse
+import com.sargss.uatopnews.data.api.ArticlesResponse
 import com.sargss.uatopnews.databinding.FragmentNewsBinding
+import com.sargss.uatopnews.presentation.ui.adapter.ItemsMarginDecoration
+import com.sargss.uatopnews.presentation.presenters.NewsPresenter
+import com.sargss.uatopnews.presentation.ui.adapter.NewsRecyclerAdapter
 import javax.inject.Inject
 
 
@@ -50,12 +54,22 @@ class NewsFragment : Fragment(), NewsListContract.View {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         presenter.loadNews()
+
+        binding.inputNewsSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean = true
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                presenter.processSearch(newText)
+                return true
+            }
+        })
     }
 
     fun openInBrowser(link: String?) {
         try {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(link))
-            val chooser: Intent = Intent.createChooser(intent, getString(R.string.msg_choose_browser))
+            val chooser: Intent =
+                Intent.createChooser(intent, getString(R.string.msg_choose_browser))
 
             startActivity(chooser)
         } catch (e: ActivityNotFoundException) {
@@ -68,15 +82,24 @@ class NewsFragment : Fragment(), NewsListContract.View {
     }
 
     override fun showNewsList(list: List<ArticlesResponse.Articles>) {
+        if (adapter == null) {
+            createNewsList()
+        }
+
+        adapter!!.setItems(list)
+    }
+
+    private fun createNewsList() {
         val carsRecyclerView: RecyclerView = binding.newsList
+
         carsRecyclerView.layoutManager = LinearLayoutManager(context)
 
-        adapter = NewsRecyclerAdapter(list, this)
+        adapter = NewsRecyclerAdapter(this)
 
         carsRecyclerView.adapter = adapter
         carsRecyclerView.addItemDecoration(
             ItemsMarginDecoration(
-                requireContext(),
+                resources.displayMetrics,
                 resources.getDimension(R.dimen.news_card_margins)
             )
         )

@@ -1,4 +1,4 @@
-package com.sargss.uatopnews.screens.offline
+package com.sargss.uatopnews.presentation.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

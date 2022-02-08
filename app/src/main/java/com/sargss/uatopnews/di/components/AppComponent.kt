@@ -3,7 +3,7 @@ package com.sargss.uatopnews.di.components
 import android.content.Context
 import com.sargss.uatopnews.di.module.ApiModule
 import com.sargss.uatopnews.di.module.AppModule
-import com.sargss.uatopnews.screens.news.NewsFragment
+import com.sargss.uatopnews.presentation.ui.NewsFragment
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton

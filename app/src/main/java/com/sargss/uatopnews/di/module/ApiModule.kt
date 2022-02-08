@@ -1,8 +1,10 @@
 package com.sargss.uatopnews.di.module
 
+import com.sargss.uatopnews.api.NetworkInterceptor
 import com.sargss.uatopnews.api.News
 import dagger.Module
 import dagger.Provides
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -34,9 +36,18 @@ class ApiModule {
 
     @Singleton
     @Provides
-    fun httpClient(): OkHttpClient = OkHttpClient.Builder().build()
+    fun httpClient(interceptor: Interceptor): OkHttpClient {
+        return OkHttpClient
+            .Builder()
+            .addInterceptor(interceptor)
+            .build()
+    }
 
     @Singleton
     @Provides
     fun gsonFactory(): GsonConverterFactory = GsonConverterFactory.create()
+
+    @Singleton
+    @Provides
+    fun interceptor(): Interceptor = NetworkInterceptor()
 }
