@@ -18,6 +18,7 @@ import com.sargss.uatopnews.R
 import com.sargss.uatopnews.presentation.contracts.NewsListContract
 import com.sargss.uatopnews.data.models.ArticlesResponse
 import com.sargss.uatopnews.databinding.FragmentNewsBinding
+import com.sargss.uatopnews.domain.models.NewsEntity
 import com.sargss.uatopnews.presentation.ui.adapter.ItemsMarginDecoration
 import com.sargss.uatopnews.presentation.presenters.NewsPresenter
 import com.sargss.uatopnews.presentation.ui.adapter.NewsRecyclerAdapter
@@ -80,7 +81,7 @@ class NewsFragment : Fragment(), NewsListContract.View {
         }
     }
 
-    override fun showNewsList(list: List<ArticlesResponse.Articles>) {
+    override fun showNewsList(list: List<NewsEntity>) {
         if (adapter == null) {
             createNewsList()
         }

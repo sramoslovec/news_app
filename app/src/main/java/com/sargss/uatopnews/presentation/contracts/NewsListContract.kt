@@ -1,6 +1,6 @@
 package com.sargss.uatopnews.presentation.contracts
 
-import com.sargss.uatopnews.data.models.ArticlesResponse
+import com.sargss.uatopnews.domain.models.NewsEntity
 
 interface NewsListContract {
 
@@ -10,7 +10,7 @@ interface NewsListContract {
     }
 
     interface View : BaseContract.View {
-        fun showNewsList(list: List<ArticlesResponse.Articles>)
+        fun showNewsList(list: List<NewsEntity>)
         fun showNetworkError()
     }
 }

@@ -8,20 +8,18 @@ import android.webkit.URLUtil
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.text.parseAsHtml
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.sargss.uatopnews.data.models.ArticlesResponse
 import com.sargss.uatopnews.databinding.CardNewsItemBinding
+import com.sargss.uatopnews.domain.models.NewsEntity
 import com.sargss.uatopnews.presentation.ui.NewsFragment
-import java.text.SimpleDateFormat
 import java.util.*
 
 class NewsRecyclerAdapter(private val fragment: NewsFragment) :
     RecyclerView.Adapter<NewsRecyclerAdapter.ViewHolder>() {
 
-    private var list: List<ArticlesResponse.Articles> = listOf()
+    private var list: List<NewsEntity> = listOf()
         set(value) {
             val diffCallback = DiffUtilCallback(list, value)
             val diffResult = DiffUtil.calculateDiff(diffCallback)
@@ -33,9 +31,9 @@ class NewsRecyclerAdapter(private val fragment: NewsFragment) :
         }
 
 
-    private var cachedList: List<ArticlesResponse.Articles> = listOf()
+    private var cachedList: List<NewsEntity> = listOf()
 
-    fun setItems(newList: List<ArticlesResponse.Articles>) {
+    fun setItems(newList: List<NewsEntity>) {
         list = newList
     }
 
@@ -63,27 +61,19 @@ class NewsRecyclerAdapter(private val fragment: NewsFragment) :
 
     @SuppressLint("SimpleDateFormat")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val model: ArticlesResponse.Articles = list[position]
+        val model: NewsEntity = list[position]
 
-        if (URLUtil.isValidUrl(model.urlToImage)) {
+        if (URLUtil.isValidUrl(model.imageUrl)) {
             holder.imageNews.visibility = View.VISIBLE
             Glide.with(fragment)
-                .load(model.urlToImage)
+                .load(model.imageUrl)
                 .centerCrop()
                 .into(holder.imageNews)
         }
 
-        try {
-            val date: Date? = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
-                .parse(model.publishedAt!!)
-
-            holder.textPublishedTime.text = SimpleDateFormat("HH:mm").format(date!!)
-        } catch (e: Exception) {
-            holder.textPublishedTime.visibility = View.INVISIBLE
-        }
-
         showTextOrHide(holder.textTitle, model.title)
-        showTextOrHide(holder.textSource, model.source?.name)
+        showTextOrHide(holder.textPublishedTime, model.time)
+        showTextOrHide(holder.textSource, model.source)
         showTextOrHide(holder.textDescription, model.description)
 
         holder.btnOpenNewsInBrowser.setOnClickListener {
@@ -99,16 +89,15 @@ class NewsRecyclerAdapter(private val fragment: NewsFragment) :
         if (value.isNullOrBlank()) {
             textElement.visibility = View.GONE
         } else {
-            // i saw at least apostrophe encoded in HTML code, so to correctly show encoded symbols
-            // i just parse all text as html
-            textElement.text = value.parseAsHtml()
+            textElement.text = value
         }
     }
 
     class DiffUtilCallback(
-        private val oldList: List<ArticlesResponse.Articles>,
-        private val newList: List<ArticlesResponse.Articles>
+        private val oldList: List<NewsEntity>,
+        private val newList: List<NewsEntity>
     ) : DiffUtil.Callback() {
+
         override fun getOldListSize(): Int = oldList.size
 
         override fun getNewListSize(): Int = newList.size
