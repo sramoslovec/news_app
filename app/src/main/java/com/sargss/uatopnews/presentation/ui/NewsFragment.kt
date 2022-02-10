@@ -71,6 +71,7 @@ class NewsFragment : BaseFragment<FragmentNewsBinding>(FragmentNewsBinding::infl
         }
 
         adapter!!.setItems(list)
+        binding.newsList.layoutManager?.smoothScrollToPosition(binding.newsList, null, 0)
     }
 
     private fun createNewsList() {
