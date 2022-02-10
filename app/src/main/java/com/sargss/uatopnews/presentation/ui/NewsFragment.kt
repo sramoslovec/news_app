@@ -5,54 +5,38 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.SearchView
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.sargss.uatopnews.core.App
 import com.sargss.uatopnews.R
-import com.sargss.uatopnews.presentation.contracts.NewsListContract
-import com.sargss.uatopnews.data.models.ArticlesResponse
+import com.sargss.uatopnews.core.App
 import com.sargss.uatopnews.databinding.FragmentNewsBinding
 import com.sargss.uatopnews.domain.models.NewsEntity
-import com.sargss.uatopnews.presentation.ui.adapter.ItemsMarginDecoration
+import com.sargss.uatopnews.presentation.contracts.NewsListContract
 import com.sargss.uatopnews.presentation.presenters.NewsPresenter
+import com.sargss.uatopnews.presentation.ui.adapter.ItemsMarginDecoration
 import com.sargss.uatopnews.presentation.ui.adapter.NewsRecyclerAdapter
 import javax.inject.Inject
 
 
-class NewsFragment : Fragment(), NewsListContract.View {
+class NewsFragment : BaseFragment<FragmentNewsBinding>(FragmentNewsBinding::inflate), NewsListContract.View {
 
     @Inject
     lateinit var presenter: NewsPresenter
 
     private var adapter: NewsRecyclerAdapter? = null
 
-    private var _binding: FragmentNewsBinding? = null
-
-    private val binding get() = _binding!!
-
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
         (requireActivity().application as App).appComponent?.inject(this)
-
-        presenter.attachView(this)
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentNewsBinding.inflate(inflater, container, false)
-        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        presenter.attachView(this)
+
         presenter.loadNews()
 
         binding.inputNewsSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -109,9 +93,9 @@ class NewsFragment : Fragment(), NewsListContract.View {
         (requireActivity() as MainActivity).showConnectionErrorScreen()
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
+    override fun onDestroy() {
+        super.onDestroy()
         presenter.onDestroy()
-        _binding = null
     }
+
 }

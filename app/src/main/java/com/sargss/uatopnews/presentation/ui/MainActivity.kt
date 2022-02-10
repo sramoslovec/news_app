@@ -1,6 +1,7 @@
 package com.sargss.uatopnews.presentation.ui
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
 import com.sargss.uatopnews.R
@@ -10,7 +11,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        showNewsListScreen()
+        if (savedInstanceState == null) {
+            showNewsListScreen()
+        }
     }
 
     fun showNewsListScreen() {
