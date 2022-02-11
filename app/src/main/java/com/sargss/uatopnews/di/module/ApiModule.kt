@@ -1,6 +1,6 @@
 package com.sargss.uatopnews.di.module
 
-import com.sargss.uatopnews.data.api.NetworkInterceptor
+import com.sargss.uatopnews.data.api.ApiKeyInterceptor
 import com.sargss.uatopnews.data.api.News
 import dagger.Module
 import dagger.Provides
@@ -49,5 +49,5 @@ class ApiModule {
 
     @Singleton
     @Provides
-    fun interceptor(): Interceptor = NetworkInterceptor()
+    fun interceptor(): Interceptor = ApiKeyInterceptor()
 }
