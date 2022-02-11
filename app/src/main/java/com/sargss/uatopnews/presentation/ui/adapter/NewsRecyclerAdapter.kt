@@ -16,7 +16,11 @@ import com.sargss.uatopnews.domain.models.NewsEntity
 import com.sargss.uatopnews.presentation.ui.NewsFragment
 import java.util.*
 
-class NewsRecyclerAdapter(private val fragment: NewsFragment) :
+class NewsRecyclerAdapter(
+    private val fragment: NewsFragment,
+    private val recyclerView: RecyclerView,
+    private val emptyView: TextView
+) :
     RecyclerView.Adapter<NewsRecyclerAdapter.ViewHolder>() {
 
     private var list: List<NewsEntity> = listOf()
@@ -35,6 +39,13 @@ class NewsRecyclerAdapter(private val fragment: NewsFragment) :
 
     fun setItems(newList: List<NewsEntity>) {
         list = newList
+        if (newList.isEmpty()) {
+            recyclerView.visibility = View.GONE
+            emptyView.visibility = View.VISIBLE
+        } else {
+            recyclerView.visibility = View.VISIBLE
+            emptyView.visibility = View.GONE
+        }
     }
 
     override fun onCreateViewHolder(

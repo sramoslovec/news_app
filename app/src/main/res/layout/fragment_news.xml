@@ -37,4 +37,12 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:listitem="@layout/card_news_item" />
 
+    <TextView
+        android:id="@+id/empty_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:visibility="gone"
+        android:text="@string/msg_news_not_found" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

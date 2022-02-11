@@ -19,14 +19,12 @@ class MainActivity : AppCompatActivity() {
     fun showNewsListScreen() {
         supportFragmentManager.commit {
             replace(R.id.fragment_container_view, NewsFragment())
-            addToBackStack(null)
         }
     }
 
     fun showConnectionErrorScreen() {
         supportFragmentManager.commit {
             replace(R.id.fragment_container_view, NoInternetFragment())
-            addToBackStack(null)
         }
     }
 }

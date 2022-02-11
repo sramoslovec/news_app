@@ -75,11 +75,11 @@ class NewsFragment : BaseFragment<FragmentNewsBinding>(FragmentNewsBinding::infl
     }
 
     private fun createNewsList() {
-        val carsRecyclerView: RecyclerView = binding.newsList
+        val carsRecyclerView = binding.newsList
 
         carsRecyclerView.layoutManager = LinearLayoutManager(context)
 
-        adapter = NewsRecyclerAdapter(this)
+        adapter = NewsRecyclerAdapter(this, binding.newsList, binding.emptyView)
 
         carsRecyclerView.adapter = adapter
         carsRecyclerView.addItemDecoration(
